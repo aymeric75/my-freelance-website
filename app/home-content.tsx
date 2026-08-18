@@ -27,12 +27,12 @@ export function HomeContent({language}:{language:Language}) {
   return <>
     <header className="site-header home-header"><Link className="wordmark" href={`/${language}`}>Aymeric<span>Dev</span></Link><nav aria-label="Navigation principale"><a href="#expertise">{t.nav[0]}</a><a href="#profile-cv">{t.nav[1]}</a><a href="#profile-links">{t.nav[2]}</a></nav><Link className="language-switch" href={`/${otherLanguage}`} hrefLang={otherLanguage}>{t.switchLabel} <span>↗</span></Link></header>
     <main className="portfolio-layout">
-      <aside className="profile-column"><div className="profile-photo"><Image src="/images/profile/aymeric.jpg" alt="Aymeric Dev" fill priority sizes="(max-width: 860px) 100vw, 33vw"/></div><div className="profile-content">
+      <aside className="profile-column"><div className="profile-photo"><div className="profile-photo-frame"><Image src="/images/profile/aymeric.jpg" alt="Aymeric Dev" fill priority sizes="(max-width: 860px) 100vw, 33vw"/></div></div><div className="profile-content">
         <p className="availability"><span/>{t.status}</p><h1>Aymeric Dev</h1><p className="profile-role">{t.role}</p><p className="profile-bio">{t.bio}</p>
         <section className="profile-block" id="profile-cv"><h2>{t.cvTitle}</h2><p>{t.curriculum}</p><p className="profile-location">{t.location}</p></section>
         <section className="profile-block" id="profile-links"><h2>{t.linksTitle}</h2><div className="profile-links"><a href="https://github.com/aymeric75" target="_blank" rel="noreferrer">GitHub ↗</a><span>{t.reviews}</span></div></section>
       </div></aside>
-      <div className="themes-column" id="expertise"><section className="themes-intro"><p className="eyebrow">{t.intro}</p><h2>{t.headline}</h2></section>
+      <div className="themes-column" id="expertise">
         {t.themes.map(theme=><section className={`theme-section theme-${theme.accent}`} key={theme.slug}><div className="theme-number">{theme.number}</div><div className="theme-body"><h2>{theme.title}</h2><p>{theme.description}</p><ul>{theme.skills.map(skill=><li key={skill}>{skill}</li>)}</ul><Link href={`/${language}/projects/${theme.slug}`}>{theme.link} <span>↗</span></Link></div></section>)}
         <footer className="home-footer"><span>© {new Date().getFullYear()} Aymeric Dev</span><span>{t.footer}</span></footer>
       </div>
