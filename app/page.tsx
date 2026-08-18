@@ -1,66 +1,84 @@
-import { Metadata } from "next"
-import { Button } from "components/Button/Button"
+import Image from "next/image"
+import Link from "next/link"
 
-import { LP_GRID_ITEMS } from "lp-items"
+import { projects } from "./projects"
 
-export const metadata: Metadata = {
-  title: "Next.js Enterprise BoilerplateEEEEE",
-  twitter: {
-    card: "summary_large_image",
-  },
-  openGraph: {
-    url: "https://next-enterprise.vercel.app/",
-    images: [
-      {
-        width: 1200,
-        height: 630,
-        url: "https://raw.githubusercontent.com/Blazity/next-enterprise/main/.github/assets/project-logo.png",
-      },
-    ],
-  },
-}
+const Arrow = () => <span aria-hidden="true">↗</span>
 
-export default function Web() {
+export default function Home() {
   return (
     <>
-      <section className="bg-white dark:bg-gray-900">
-        <div className="mx-auto grid max-w-(--breakpoint-xl) px-4 py-8 text-center lg:py-16">
-          <div className="mx-auto place-self-center">
-            <h1 className="mb-4 max-w-2xl text-4xl leading-none font-extrabold tracking-tight md:text-5xl xl:text-6xl dark:text-white">
-              Next.js Enterprise BoilerplateCCCCC
-            </h1>
-            <p className="mb-6 max-w-2xl font-light text-gray-500 md:text-lg lg:mb-8 lg:text-xl dark:text-gray-400">
-              Jumpstart your enterprise project with our feature-packed, high-performance Next.js boilerplate!
-              Experience rapid UI development, AI-powered code reviews, and an extensive suite of tools for a smooth and
-              enjoyable development process.
-            </p>
-            <Button href="https://github.com/Blazity/next-enterprise" className="mr-3">
-              Get started
-            </Button>
-            <Button
-              href="https://vercel.com/new/git/external?repository-url=https://github.com/Blazity/next-enterprise"
-              intent="secondary"
-            >
-              Deploy Now
-            </Button>
+      <header className="site-header">
+        <Link className="wordmark" href="#top" aria-label="Aymeric Dev, home">Aymeric<span>Dev</span></Link>
+        <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+      </header>
+      <main id="top">
+        <section className="hero shell">
+          <div className="hero-copy">
+            <p className="eyebrow"><span className="status-dot" /> Available for selected projects</p>
+            <h1>I build AI systems that move from <em>research</em> to reality.</h1>
+            <p className="hero-intro">Applied AI researcher and engineer working across computer vision, neuro-symbolic AI and interpretable machine learning.</p>
+            <div className="hero-actions">
+              <a className="button primary" href="#work">Explore selected work <span>↓</span></a>
+              <a className="button text-button" href="https://github.com/aymeric75" target="_blank" rel="noreferrer">Start a conversation <Arrow /></a>
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="bg-white dark:bg-gray-900">
-        <div className="mx-auto max-w-(--breakpoint-xl) px-4 py-8 sm:py-16 lg:px-6">
-          <div className="justify-center space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
-            {LP_GRID_ITEMS.map((singleItem) => (
-              <div key={singleItem.title} className="flex flex-col items-center justify-center text-center">
-                <div className="bg-primary-100 dark:bg-primary-900 mb-4 flex size-10 items-center justify-center rounded-full p-1.5 text-blue-700 lg:size-12">
-                  {singleItem.icon}
+          <div className="hero-portrait">
+            <Image src="/images/profile/aymeric.jpg" alt="Aymeric Dev" fill priority sizes="(max-width: 800px) 75vw, 34vw" />
+            <span className="portrait-caption">Based in Europe · Working internationally</span>
+          </div>
+        </section>
+
+        <section className="proof-strip" aria-label="Professional highlights"><div className="shell proof-grid">
+          <div><strong>PhD</strong><span>Artificial Intelligence</span></div><div><strong>ICTAI ’24</strong><span>Published research</span></div>
+          <div><strong>9 × 5★</strong><span>Freelance client reviews</span></div><div><strong>End-to-end</strong><span>Research to deployment</span></div>
+        </div></section>
+
+        <section className="work-section shell" id="work">
+          <div className="section-heading"><div><p className="eyebrow">Selected work</p><h2>Three ways I turn complex ideas into useful systems.</h2></div><p>Commercial delivery, published research and transparent work in progress.</p></div>
+          <div className="project-list">
+            {projects.map((project, index) => (
+              <article className={`project-card ${index % 2 ? "reverse" : ""}`} key={project.slug}>
+                <Link className="project-visual" href={`/work/${project.slug}`} aria-label={`Read ${project.title} case study`}>
+                  {project.image.endsWith(".gif") ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={project.image} alt={project.imageAlt} loading={index === 0 ? "eager" : "lazy"} />
+                  ) : <Image src={project.image} alt={project.imageAlt} fill sizes="(max-width: 800px) 100vw, 58vw" />}
+                  <span className={`project-index accent-${index + 1}`}>0{index + 1}</span>
+                </Link>
+                <div className="project-copy">
+                  <div className="project-meta"><span>{project.kind}</span><span>{project.year}</span></div>
+                  <h3>{project.title}</h3><p>{project.summary}</p>
+                  <ul className="tag-list" aria-label="Technologies">{project.tags.slice(0, 4).map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  <Link className="case-link" href={`/work/${project.slug}`}>Read the case study <Arrow /></Link>
                 </div>
-                <h3 className="mb-2 text-xl font-bold dark:text-white">{singleItem.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400">{singleItem.description}</p>
-              </div>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section className="testimonial-section"><div className="shell testimonial-grid">
+          <p className="eyebrow">Client perspective</p>
+          <blockquote>“His technical competence is undeniable, but his ability to integrate complex technical aspects into a complete solution is what truly sets him apart.”</blockquote>
+          <div className="quote-credit"><strong>Justin Theytaz</strong><span>Swiss computer-vision client · translated from French</span></div>
+        </div></section>
+
+        <section className="about-section shell" id="about">
+          <div><p className="eyebrow">About</p><h2>Research depth.<br />Engineering discipline.</h2></div>
+          <div className="about-copy">
+            <p className="lead">I’m Aymeric Dev, an AI researcher and engineer interested in systems that learn, reason and remain understandable.</p>
+            <p>My work spans academic research and real-world delivery—from learning executable symbolic models directly from images to deploying computer vision on constrained edge hardware.</p>
+            <p>Before specializing in AI, I spent years building production web systems, APIs and data integrations. That background still shapes how I work: practical scope, clear communication and software that has to survive outside a notebook.</p>
+            <div className="capabilities"><div><span>01</span><strong>Applied ML & computer vision</strong></div><div><span>02</span><strong>Neuro-symbolic AI & planning</strong></div><div><span>03</span><strong>Research prototypes & experiments</strong></div><div><span>04</span><strong>APIs & edge deployment</strong></div></div>
+          </div>
+        </section>
+
+        <section className="contact-section" id="contact"><div className="shell contact-inner">
+          <p className="eyebrow">Have a difficult problem?</p><h2>Let’s make it<br /><em>work in the real world.</em></h2>
+          <a className="contact-link" href="https://github.com/aymeric75" target="_blank" rel="noreferrer">Start a conversation <Arrow /></a>
+        </div></section>
+      </main>
+      <footer className="site-footer shell"><span>© {new Date().getFullYear()} Aymeric Dev</span><div><a href="https://github.com/aymeric75" target="_blank" rel="noreferrer">GitHub <Arrow /></a></div></footer>
     </>
   )
 }

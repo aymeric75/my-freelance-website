@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="190" viewBox="0 0 1000 190" role="img" aria-labelledby="title desc">
+  <title id="title">Market impact dynamics pipeline</title>
+  <desc id="desc">MarS generates paired trajectories, impact is constructed, SINDy discovers equations, and two forecasts are evaluated.</desc>
+  <rect width="1000" height="190" rx="18" fill="#07111f"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g fill="#0c1a2b" stroke="#29415e" stroke-width="2">
+      <rect x="35" y="42" width="185" height="105" rx="12"/>
+      <rect x="285" y="42" width="185" height="105" rx="12"/>
+      <rect x="535" y="42" width="185" height="105" rx="12"/>
+      <rect x="785" y="42" width="180" height="105" rx="12"/>
+    </g>
+    <g fill="#eef5ff" font-size="18" font-weight="700">
+      <text x="127" y="78">MarS</text>
+      <text x="377" y="78">Paired impact</text>
+      <text x="627" y="78">SINDy</text>
+      <text x="875" y="78">Forecast</text>
+    </g>
+    <g fill="#8fa4bd" font-size="13">
+      <text x="127" y="105">baseline + TWAP</text>
+      <text x="127" y="124">order rollouts</text>
+      <text x="377" y="105">signed log-price</text>
+      <text x="377" y="124">counterfactual</text>
+      <text x="627" y="105">sparse controlled</text>
+      <text x="627" y="124">differential equations</text>
+      <text x="875" y="105">execution +</text>
+      <text x="875" y="124">relaxation</text>
+    </g>
+    <g fill="none" stroke="#ffb547" stroke-width="3">
+      <path d="M220 95h51"/><path d="m265 88 8 7-8 7"/>
+      <path d="M470 95h51"/><path d="m515 88 8 7-8 7"/>
+      <path d="M720 95h51"/><path d="m765 88 8 7-8 7"/>
+    </g>
+  </g>
+</svg>
