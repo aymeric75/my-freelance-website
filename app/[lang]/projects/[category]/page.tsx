@@ -6,8 +6,8 @@ import {projects} from "../../../projects"
 import {additionalAiProjects,aiProjectCopy,webProjects} from "../../../theme-projects"
 
 const text={
-  fr:{back:"Retour à l’accueil",aiTitle:"Projets en intelligence artificielle",aiIntro:"Recherche publiée, systèmes livrés à des clients et prototypes en cours.",webTitle:"Projets de développement web",webIntro:"Une sélection de missions illustrant mon expérience antérieure en production, e-commerce, APIs, performance et SEO.",clientSection:"Applications client",researchSection:"Recherche",caseStudy:"Lire l’étude de cas",viewProject:"Voir le projet",switch:"English"},
-  en:{back:"Back to home",aiTitle:"Artificial intelligence projects",aiIntro:"Published research, client systems and transparent work in progress.",webTitle:"Web development projects",webIntro:"Selected work from my earlier experience with production systems, e-commerce, APIs, performance and SEO.",clientSection:"Client applications",researchSection:"Research",caseStudy:"Read case study",viewProject:"View project",switch:"Français"},
+  fr:{back:"Retour à l’accueil",aiTitle:"Projets en intelligence artificielle",aiIntro:"Recherche publiée, systèmes livrés à des clients et prototypes en cours.",webTitle:"Projets de développement web",webIntro:"Une sélection de missions illustrant mon expérience antérieure en production, e-commerce, APIs, performance et SEO.",clientSection:"Applications client",researchSection:"Recherche",caseStudy:"Lire l’étude de cas",viewProject:"Voir le projet",visitWebsite:"Visiter le site",switch:"English"},
+  en:{back:"Back to home",aiTitle:"Artificial intelligence projects",aiIntro:"Published research, client systems and transparent work in progress.",webTitle:"Web development projects",webIntro:"Selected work from my earlier experience with production systems, e-commerce, APIs, performance and SEO.",clientSection:"Client applications",researchSection:"Research",caseStudy:"Read case study",viewProject:"View project",visitWebsite:"Visit website",switch:"Français"},
 } as const
 
 export function generateStaticParams(){return ["fr","en"].flatMap(lang=>["ai","web"].map(category=>({lang,category})))}
@@ -24,7 +24,7 @@ export default async function ThemeProjects({params}:{params:Promise<{lang:strin
       <AiProjectSection title={t.clientSection} language={l} group="client" linkLabel={t}/>
       <AiProjectSection title={t.researchSection} language={l} group="research" linkLabel={t}/>
     </div>}
-    {category==="web"&&<div className="web-project-list">{webProjects.map(project=><article key={project.title}><div><span>{project.year}</span><span>{project.kind}</span></div><h2>{project.title}</h2><p>{project.description[l]}</p><ul>{project.skills.map(skill=><li key={skill}>{skill}</li>)}</ul></article>)}</div>}
+    {category==="web"&&<div className="web-project-list">{webProjects.map(project=><article className="web-project-row" key={project.title}><a className="web-project-visual" href={project.href} target="_blank" rel="noreferrer" aria-label={`${t.visitWebsite} — ${project.title}`}><span className="web-browser-bar" aria-hidden="true"><i/><i/><i/><b>{new URL(project.href).hostname.replace("www.","")}</b></span><span className="web-project-shot"><Image src={project.image} alt={project.imageAlt[l]} fill sizes="(max-width: 800px) 100vw, 55vw"/></span></a><div className="web-project-details"><div className="web-project-meta"><span>{project.year}</span><span>{project.kind[l]}</span></div><h2>{project.title}</h2><p>{project.description[l]}</p><ul>{project.skills.map(skill=><li key={skill}>{skill}</li>)}</ul><a href={project.href} target="_blank" rel="noreferrer">{t.visitWebsite} ↗</a></div></article>)}</div>}
   </main></>
 }
 
