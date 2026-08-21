@@ -41,7 +41,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug:s
         </div>
       </section>}
       {project.slug === "market-impact-dynamics" && <aside className="research-note shell"><strong>Research status</strong><p>The visualizations shown here use an illustrative dataset to validate the pipeline. They are not presented as empirical performance results.</p></aside>}
-      {project.slug === "bowling-pin-detection" && <section className="case-quote shell"><blockquote>“His experience and vision were crucial to the success of this project. He integrated a complex feature seamlessly into the complete solution.”</blockquote><p>Justin Theytaz · Client review, translated from French</p></section>}
+      {project.slug === "bowling-pin-detection" && <section className="case-quote shell"><div className="case-quote-rating"><span aria-label="5 out of 5">★★★★★</span><small>Verified Codeur.com review</small></div><blockquote>“Aymeric demonstrated a deep understanding of the technical requirements from the outset, identifying and configuring the necessary hardware with remarkable speed and efficiency. His technical expertise is undeniable, but his ability to integrate these technical aspects into a complete solution is what truly sets him apart.”</blockquote><div className="case-quote-credit"><strong>Justin Theytaz</strong><a href="https://2ds.ch/" target="_blank" rel="noreferrer">2DS, Switzerland ↗</a><span>Client · November 2023</span></div></section>}
       <Link className="next-project" href={`/work/${nextProject.slug}`}><span>Next case study</span><strong>{nextProject.shortTitle} <b>↗</b></strong></Link>
     </main>
   </>
